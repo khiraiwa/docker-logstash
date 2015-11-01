@@ -7,7 +7,7 @@ ENV LOGSTASH_VERSION 2.0.0
 # Install Java
 RUN \
   apt-get update && \
-  apt-get install software-properties-common python-software-properties wget unzip -y && \
+  apt-get install software-properties-common python-software-properties wget unzip git -y && \
   echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
   add-apt-repository -y ppa:webupd8team/java && \
   apt-get update && \
@@ -32,7 +32,8 @@ RUN \
 ADD logstash.conf /home/logstash/logstash-${LOGSTASH_VERSION}/logstash.conf
 
 # Install plugin
-# RUN /home/logstash/logstash-${LOGSTASH_VERSION}/bin/plugin install logstash-input-cloudwatch
+COPY logstash-input-cloudwatch-0.2.2.gem /home/logstash/logstash-input-cloudwatch-0.2.2.gem
+RUN /home/logstash/logstash-${LOGSTASH_VERSION}/bin/plugin install /home/logstash/logstash-input-cloudwatch-0.2.2.gem
 
 RUN mkdir -p /data_logstash/
 VOLUME ["/data_logstash/"]
