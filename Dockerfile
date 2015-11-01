@@ -2,6 +2,8 @@ FROM ubuntu:14.04.2
 
 MAINTAINER khiraiwa
 
+ENV AWS_ACCESS_KEY_ID dummy
+ENV AWS_SECRET_ACCESS_KEY dummy
 ENV LOGSTASH_VERSION 2.0.0
 
 # Install Java
