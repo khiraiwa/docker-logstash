@@ -2,8 +2,7 @@ FROM ubuntu:14.04.2
 
 MAINTAINER khiraiwa
 
-# input-cloudwatch plugin don'tstill support 2.0.0
-ENV LOGSTASH_VERSION 1.5.5
+ENV LOGSTASH_VERSION 2.0.0
 
 # Install Java
 RUN \
@@ -33,7 +32,7 @@ RUN \
 ADD logstash.conf /home/logstash/logstash-${LOGSTASH_VERSION}/logstash.conf
 
 # Install plugin
-RUN /home/logstash/logstash-${LOGSTASH_VERSION}/bin/plugin install logstash-input-cloudwatch
+# RUN /home/logstash/logstash-${LOGSTASH_VERSION}/bin/plugin install logstash-input-cloudwatch
 
 RUN mkdir -p /data_logstash/
 VOLUME ["/data_logstash/"]
