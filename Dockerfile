@@ -53,5 +53,7 @@ WORKDIR /home/logstash/logstash-${LOGSTASH_VERSION}
 
 CMD \
   sudo chown -R logstash:logstash /data_logstash && \
-  cp /home/logstash/logstash-${LOGSTASH_VERSION}/logstash.conf /data_logstash/logstash.conf && \
+  if [ ! -e /data_logstash/logstash.conf ]; then \
+    cp /home/logstash/logstash-${LOGSTASH_VERSION}/logstash.conf /data_logstash/logstash.conf; \
+  fi && \
   /home/logstash/logstash-${LOGSTASH_VERSION}/bin/logstash agent -f /data_logstash/logstash.conf
