@@ -53,6 +53,7 @@ WORKDIR /home/logstash/logstash-${LOGSTASH_VERSION}
 
 CMD \
   sudo chown -R logstash:logstash /data_logstash && \
+  sed -i -e"s|ELASTICSEARCH_HOST|${ELASTICSEARCH_HOST}|g" /home/logstash/logstash-${LOGSTASH_VERSION}/logstash.conf && \
   if [ ! -e /data_logstash/logstash.conf ]; then \
     cp /home/logstash/logstash-${LOGSTASH_VERSION}/logstash.conf /data_logstash/logstash.conf; \
   fi && \
